@@ -2,8 +2,7 @@
 
 namespace Database\Seeders;
 
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-use App\Models\Category;
+use App\Models\Image;
 use App\Models\Post;
 use App\Models\User;
 use Illuminate\Database\Seeder;
@@ -17,6 +16,14 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        Post::factory(5)->create();
+      // create my user
+      User::factory()->create([
+        'username' => 'jen',
+        'name' => 'jen',
+        'email' => 'jenleighkelly@gmail.com',
+      ]);
+
+      Post::factory(5)->create();
+      Image::factory(5)->create();
     }
 }

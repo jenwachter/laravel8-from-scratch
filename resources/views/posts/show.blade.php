@@ -6,7 +6,13 @@
             <article class="max-w-4xl mx-auto lg:grid lg:grid-cols-12 gap-x-10">
                 <div class="col-span-4 lg:text-center lg:pt-14 mb-10">
                     @if ($post->thumbnail)
-                    <img src="{{ asset('storage/' . $post->thumbnail) }}" alt="" class="rounded-xl">
+                    <img src="{{ $post->thumbnail->url }}" alt="{{ $post->thumbnail->alt }}" class="rounded-xl">
+                    @endif
+
+                    @if ($post->thumbnail->caption)
+                      <div class="mt-2 text-left text-xs">
+                        {!! $post->thumbnail->caption !!}
+                      </div>
                     @endif
 
                     <p class="mt-4 block text-gray-400 text-xs">

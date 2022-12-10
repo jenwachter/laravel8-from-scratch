@@ -17,7 +17,7 @@ class Post extends Model
 
   protected $guarded = ['id'];
 
-  protected $with = ['author', 'category'];
+  protected $with = ['author', 'category', 'thumbnail'];
 
   // relationships: hasOne, hasMany, belongsTo, belongsToMany
 
@@ -37,7 +37,6 @@ class Post extends Model
    */
   public function comments()
   {
-    // don't need to specify column name because laravel assumes `comment_id`
     return $this->hasMany(Comment::class);
   }
 
@@ -49,6 +48,11 @@ class Post extends Model
   {
     // need to specify column name because laravel assumes `author_id`
     return $this->belongsTo(User::class, 'user_id');
+  }
+
+  public function thumbnail()
+  {
+    return $this->hasOne(Image::class);
   }
 
   /**
