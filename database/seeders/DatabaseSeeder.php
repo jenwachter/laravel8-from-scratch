@@ -23,7 +23,17 @@ class DatabaseSeeder extends Seeder
         'email' => 'jenleighkelly@gmail.com',
       ]);
 
-      Post::factory(5)->create();
-      Image::factory(5)->create();
+      // populate images
+      $images = Image::factory(10)->create();
+
+      // populate posts
+      Post::factory(10)->create();
+
+      // populate the pivot table
+      Post::all()->each(function ($post) use ($images) {
+        $post->thumbnail()->attach(
+          $images->random(1)->pluck('id')->toArray()
+        );
+      });
     }
 }

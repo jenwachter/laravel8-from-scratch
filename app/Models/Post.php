@@ -52,7 +52,7 @@ class Post extends Model
 
   public function thumbnail()
   {
-    return $this->hasOne(Image::class);
+    return $this->belongsToMany(Image::class)->withTimestamps();
   }
 
   /**

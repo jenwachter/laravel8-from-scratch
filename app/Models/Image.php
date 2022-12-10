@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Image extends Model
 {
@@ -13,11 +14,11 @@ class Image extends Model
   protected $guarded = ['id'];
 
   /**
-   * @return BelongsTo
+   * @return BelongsToMany
    */
-  public function post()
+  public function posts()
   {
-    return $this->belongsTo(Post::class);
+    return $this->belongsToMany(Post::class)->withTimestamps();
   }
 
   /**

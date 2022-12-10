@@ -20,7 +20,6 @@ class ImageFactory extends Factory
     {
       return [
         'user_id' => User::factory(),
-        'post_id' => Post::factory(),
         'name' => $this->faker->word,
         'url' => $this->faker->imageUrl(495, 384),
         'alt' => $this->faker->sentence,
