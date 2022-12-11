@@ -19,9 +19,13 @@ class PostFactory extends Factory
      */
     public function definition()
     {
+        // $image =  Image::factory()->create();
+
         return [
             'user_id' => User::factory(),
             'category_id' => Category::factory(),
+            // 'thumbnail_id' => $image->id,
+            // 'hero_id' => $image->id,
             'title' => $this->faker->sentence,
             'slug' => $this->faker->slug,
             'excerpt' => '<p>' . implode('</p><p>', $this->faker->paragraphs(2)) . '</p>',

@@ -26,14 +26,28 @@ class DatabaseSeeder extends Seeder
       // populate images
       $images = Image::factory(10)->create();
 
-      // populate posts
-      Post::factory(10)->create();
+      // print_r($images->random(1)->pluck('id')->first());
 
-      // populate the pivot table
-      Post::all()->each(function ($post) use ($images) {
-        $post->thumbnail()->attach(
-          $images->random(1)->pluck('id')->toArray()
-        );
-      });
+      array_map(static function () use ($images) {
+        Post::factory(1)->create([
+          'thumbnail_id' => $images->random(1)->pluck('id')->first(),
+          'hero_id' => $images->random(1)->pluck('id')->first(),
+        ]);
+      }, range(0, 10));
+
+      // populate posts
+
+
+      // // populate the pivot table
+      // Post::all()->each(function ($post) use ($images) {
+      //   $post->thumbnail = $images->random(1)->pluck('id')->toArray();
+      //   $post->hero = $images->random(1)->pluck('id')->toArray();
+      //   // $post->thumbnail()->attach(
+      //   //   $images->random(1)->pluck('id')->toArray()
+      //   // );
+      //   // $post->hero()->attach(
+      //   //   $images->random(1)->pluck('id')->toArray()
+      //   // );
+      // });
     }
 }
