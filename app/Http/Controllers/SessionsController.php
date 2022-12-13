@@ -26,7 +26,7 @@ class SessionsController extends Controller
     // prevent session fixation
     session()->regenerate();
 
-    return redirect('/')->with('success', 'Welcome back!');
+    return redirect('admin/posts')->with('success', 'Welcome back!');
   }
 
   public function destroy()
