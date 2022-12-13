@@ -1,6 +1,6 @@
 <x-layout>
 
-  <x-setting heading="Create new post">
+  <x-admin.layout heading="Create new post">
     <form method="POST" action="/admin/posts" enctype="multipart/form-data">
       @csrf
 
@@ -17,6 +17,6 @@
 
       <x-form.button>Create</x-form.button>
     </form>
-  </x-setting>
+  </x-admin.layout>
 
 </x-layout>

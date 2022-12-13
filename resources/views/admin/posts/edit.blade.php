@@ -1,6 +1,6 @@
 <x-layout>
 
-  <x-setting heading="Edit: {{ $post->title }}">
+  <x-admin.layout heading="Edit: {{ $post->title }}">
     <form method="POST" action="/admin/posts/{{ $post->id }}" enctype="multipart/form-data">
       @csrf
 
@@ -13,9 +13,16 @@
 
       <div class="flex mt-6">
         <div class="flex-1">
-          <x-form.input name="thumbnail" type="file" :value="old('thumbnail', $post->thumbnail)" />
+          <x-form.input name="thumbnail" type="file" :value="old('thumbnail', $post->thumbnail->id)" />
         </div>
-        <img src="{{ asset('storage/' . $post->thumbnail) }}" alt="" class="rounded-xl ml-6" width="100">
+        <img src="{{ $post->hero->url }}" alt="" class="rounded-xl ml-6" width="100">
+      </div>
+
+      <div class="flex mt-6">
+        <div class="flex-1">
+          <x-form.input name="hero" type="file" :value="old('hero', $post->hero)" />
+        </div>
+        <img src="{{ $post->thumbnail->url }}" alt="" class="rounded-xl ml-6" width="100">
       </div>
 
       <x-form.textarea name="excerpt" required>{{ old('excerpt', $post->excerpt) }}</x-form.textarea>
@@ -28,6 +35,6 @@
 
       <x-form.button>Update</x-form.button>
     </form>
-  </x-setting>
+  </x-admin.layout>
 
 </x-layout>

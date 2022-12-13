@@ -1,6 +1,6 @@
 <x-layout>
 
-  <x-setting heading="Manage posts">
+  <x-admin.layout heading="Manage posts">
     {{-- from tailwind UI --}}
     <div class="flex flex-col">
       <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -40,6 +40,6 @@
         </div>
       </div>
     </div>
-  </x-setting>
+  </x-admin.layout>
 
 </x-layout>
