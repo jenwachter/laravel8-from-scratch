@@ -20,6 +20,10 @@ class Post extends Model
   protected $with = ['author', 'category', 'thumbnail'];
 
   // relationships: hasOne, hasMany, belongsTo, belongsToMany
+  public function revisions()
+  {
+    return $this->morphToMany(Revision::class, 'revisable')->withTimestamps();
+  }
 
   /**
    * Adds a `category` property to posts

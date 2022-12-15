@@ -13,6 +13,11 @@ class Image extends Model
 
   protected $guarded = ['id'];
 
+  public function revisions()
+  {
+    return $this->morphToMany(Revision::class, 'revisable')->withTimestamps();
+  }
+
   /**
    * @return BelongsToMany
    */
