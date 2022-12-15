@@ -2,15 +2,18 @@
 
 namespace App\Models;
 
+use App\Traits\Revisable;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Facades\Auth;
 
 class Post extends Model
 {
   use HasFactory;
+  use Revisable;
 
   // disables mass-assignment -- good to use for actual projects
   // protected $fillable = [];
@@ -19,7 +22,15 @@ class Post extends Model
 
   protected $with = ['author', 'category', 'thumbnail'];
 
-  // relationships: hasOne, hasMany, belongsTo, belongsToMany
+  protected static function boot()
+  {
+    parent::boot();
+
+    static::updating(static function ($post) {
+      $post->revise();
+    });
+  }
+
   public function revisions()
   {
     return $this->morphToMany(Revision::class, 'revisable')->withTimestamps();

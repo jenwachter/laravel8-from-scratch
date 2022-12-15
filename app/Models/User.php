@@ -57,4 +57,9 @@ class User extends Authenticatable
   {
     return $this->hasMany(Post::class);
   }
+
+  public function revisions()
+  {
+    return $this->hasMany(Revision::class);
+  }
 }

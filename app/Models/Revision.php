@@ -9,6 +9,8 @@ class Revision extends Model
 {
     use HasFactory;
 
+    protected $guarded = ['id'];
+
     public function revisable()
     {
       return $this->morphTo();

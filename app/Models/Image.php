@@ -2,20 +2,32 @@
 
 namespace App\Models;
 
+use App\Traits\Revisable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\MorphToMany;
+use Illuminate\Support\Facades\Auth;
 
 class Image extends Model
 {
   use HasFactory;
+  use Revisable;
 
   protected $guarded = ['id'];
 
-  public function revisions()
+  protected static function boot()
   {
-    return $this->morphToMany(Revision::class, 'revisable')->withTimestamps();
+    parent::boot();
+
+    static::updating(static function ($post) {
+      $revision = new Revision([
+        'user_id' => Auth::id()
+      ]);
+      $revision->save();
+      $post->revisions()->attach($revision);
+    });
   }
 
   /**
@@ -24,6 +36,14 @@ class Image extends Model
   public function posts()
   {
     return $this->belongsToMany(Post::class)->withTimestamps();
+  }
+
+  /**
+   * @return MorphToMany
+   */
+  public function revisions()
+  {
+    return $this->morphToMany(Revision::class, 'revisable')->withTimestamps();
   }
 
   /**
